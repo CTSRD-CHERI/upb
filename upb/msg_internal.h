@@ -550,14 +550,22 @@ UPB_INLINE int _upb_sizelg2(upb_CType type) {
     case kUpb_CType_Enum:
       return 2;
     case kUpb_CType_Message:
+#if defined(UPB_CHERI_SUPPORT)
+      return UPB_SIZE(2, 3, 4);
+#else
       return UPB_SIZE(2, 3);
+#endif
     case kUpb_CType_Double:
     case kUpb_CType_Int64:
     case kUpb_CType_UInt64:
       return 3;
     case kUpb_CType_String:
     case kUpb_CType_Bytes:
+#if defined(UPB_CHERI_SUPPORT)
+      return UPB_SIZE(3, 4, 5);
+#else
       return UPB_SIZE(3, 4);
+#endif
   }
   UPB_UNREACHABLE();
 }
