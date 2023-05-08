@@ -231,6 +231,7 @@ cc_test(
         "upb/internal/table.h",
         "upb/mini_table_test.cc",
     ],
+    copts = UPB_DEFAULT_CPPOPTS,
     deps = [
         ":extension_registry",
         ":mini_table",
@@ -426,6 +427,7 @@ cc_library(
 cc_test(
     name = "test_generated_code",
     srcs = ["upb/test_generated_code.cc"],
+    copts = UPB_DEFAULT_CPPOPTS,
     deps = [
         ":empty_upbdefs_proto",
         ":port",
@@ -508,6 +510,7 @@ cc_test(
 cc_test(
     name = "msg_test",
     srcs = ["upb/msg_test.cc"],
+    copts = UPB_DEFAULT_CPPOPTS,
     deps = [
         ":json",
         ":msg_test_upb_proto",
