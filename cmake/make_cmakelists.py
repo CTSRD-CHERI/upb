@@ -272,6 +272,11 @@ class Converter(object):
 
     %(prelude)s
 
+    option(UPB_ENABLE_CHERI "Build with CHERI support" ON)
+    if (UPB_ENABLE_CHERI)
+      add_definitions("-DUPB_CHERI_SUPPORT")
+    endif()
+
     # Prevent CMake from setting -rdynamic on Linux (!!).
     SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
     SET(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
