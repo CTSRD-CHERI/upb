@@ -429,12 +429,20 @@ typedef struct {
 } upb_Array;
 
 UPB_INLINE const void* _upb_array_constptr(const upb_Array* arr) {
+#if defined(UPB_CHERI_SUPPORT)
+  UPB_ASSERT((arr->data & 7) <= 5);
+#else
   UPB_ASSERT((arr->data & 7) <= 4);
+#endif
   return (void*)(arr->data & ~(uintptr_t)7);
 }
 
 UPB_INLINE uintptr_t _upb_array_tagptr(void* ptr, int elem_size_lg2) {
+#if defined(UPB_CHERI_SUPPORT)
+  UPB_ASSERT(elem_size_lg2 <= 5);
+#else
   UPB_ASSERT(elem_size_lg2 <= 4);
+#endif
   return (uintptr_t)ptr | elem_size_lg2;
 }
 
@@ -443,14 +451,22 @@ UPB_INLINE void* _upb_array_ptr(upb_Array* arr) {
 }
 
 UPB_INLINE uintptr_t _upb_tag_arrptr(void* ptr, int elem_size_lg2) {
+#if defined(UPB_CHERI_SUPPORT)
+  UPB_ASSERT(elem_size_lg2 <= 5);
+#else
   UPB_ASSERT(elem_size_lg2 <= 4);
+#endif
   UPB_ASSERT(((uintptr_t)ptr & 7) == 0);
   return (uintptr_t)ptr | (unsigned)elem_size_lg2;
 }
 
 UPB_INLINE upb_Array* _upb_Array_New(upb_Arena* a, size_t init_size,
                                      int elem_size_lg2) {
+#if defined(UPB_CHERI_SUPPORT)
+  const size_t arr_size = UPB_ALIGN_UP(sizeof(upb_Array), 16);
+#else
   const size_t arr_size = UPB_ALIGN_UP(sizeof(upb_Array), 8);
+#endif
   const size_t bytes = sizeof(upb_Array) + (init_size << elem_size_lg2);
   upb_Array* arr = (upb_Array*)upb_Arena_Malloc(a, bytes);
   if (!arr) return NULL;
