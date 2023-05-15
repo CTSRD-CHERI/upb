@@ -558,7 +558,7 @@ size_t upb_MtDecoder_SizeOfRep(upb_FieldRep rep,
 #if defined(UPB_CHERI_SUPPORT)
   static const uint8_t kRepToSizeCheri[] = {
       [kUpb_FieldRep_1Byte] = 1,    [kUpb_FieldRep_4Byte] = 4,
-      [kUpb_FieldRep_Pointer] = 16, [kUpb_FieldRep_StringView] = 16,
+      [kUpb_FieldRep_Pointer] = 16, [kUpb_FieldRep_StringView] = 32,
       [kUpb_FieldRep_8Byte] = 8,
   };
   UPB_ASSERT(sizeof(upb_StringView) ==
