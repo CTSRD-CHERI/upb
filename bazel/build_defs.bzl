@@ -37,6 +37,9 @@ _DEFAULT_CPPOPTS.extend([
     "-Werror",
     "-Wno-long-long",
     "-DUPB_CHERI_SUPPORT",
+    "-Wno-gnu-offsetof-extensions",
+    "-Wno-deprecated-declarations",
+    "-Wno-unused-but-set-variable",
 ])
 _DEFAULT_COPTS.extend([
     "-std=c99",
@@ -49,6 +52,7 @@ _DEFAULT_COPTS.extend([
     #   https://gcc.gnu.org/bugzilla/show_bug.cgi?id=80635
     #"-Wno-maybe-uninitialized",
     "-DUPB_CHERI_SUPPORT",
+    "-Wno-gnu-offsetof-extensions",
 ])
 # end:github_only
 
