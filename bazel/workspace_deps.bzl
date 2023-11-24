@@ -13,11 +13,11 @@ def _github_archive(repo, commit, **kwargs):
 
 def upb_deps():
     maybe(
-        http_archive,
+        _github_archive,
         name = "com_google_absl",
-        url = "https://github.com/abseil/abseil-cpp/archive/b9b925341f9e90f5e7aa0cf23f036c29c7e454eb.zip",
-        strip_prefix = "abseil-cpp-b9b925341f9e90f5e7aa0cf23f036c29c7e454eb",
-        sha256 = "bb2a0b57c92b6666e8acb00f4cbbfce6ddb87e83625fb851b0e78db581340617",
+        repo = "https://github.com/abseil/abseil-cpp",
+        commit = "b971ac5250ea8de900eae9f95e06548d14cd95fe",  # Abseil LTS 20230125.2
+        sha256 = "f7c2cb2c5accdcbbbd5c0c59f241a988c0b1da2a3b7134b823c0bd613b1a6880",
     )
 
     maybe(
