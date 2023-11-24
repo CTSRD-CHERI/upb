@@ -65,13 +65,13 @@
 #else
 #define UPB_SIZE(size32, size64, size_cheri) size64
 #endif
-#else /* !__CHERI_PURE_CAPABILITY__ */
+#else /* !UPB_CHERI_SUPPORT */
 #if __SIZEOF_LONG__ == 4
 #define UPB_SIZE(size32, size64) size32
 #else
 #define UPB_SIZE(size32, size64) size64
 #endif
-#endif /* !__CHERI_PURE_CAPABILITY__ */
+#endif /* !UPB_CHERI_SUPPOERT */
 
 /* If we always read/write as a consistent type to each address, this shouldn't
  * violate aliasing.
@@ -99,9 +99,9 @@
 #endif
 
 #if __has_feature(capabilities)
-#define UPB_MALLOC_ALIGN 8
-#else
 #define UPB_MALLOC_ALIGN sizeof(void * __capability)
+#else
+#define UPB_MALLOC_ALIGN 8
 #endif
 #if __has_builtin(__builtin_align_up)
 #define UPB_ALIGN_UP(size, align) __builtin_align_up(size, align)
