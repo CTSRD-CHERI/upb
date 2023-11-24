@@ -247,6 +247,7 @@ cc_test(
 cc_test(
     name = "mini_table_accessors_test",
     srcs = ["upb/mini_table_accessors_test.cc"],
+    copts = UPB_DEFAULT_CPPOPTS,
     deps = [
         ":collections",
         ":mini_table",
@@ -496,6 +497,7 @@ upb_proto_reflection_library(
 cc_test(
     name = "json_test",
     srcs = ["upb/json_test.cc"],
+    copts = UPB_DEFAULT_CPPOPTS,
     deps = [
         ":json",
         ":json_test_upb_proto",
